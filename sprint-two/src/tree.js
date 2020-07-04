@@ -23,6 +23,10 @@ treeMethods.contains = function(target) {
   if (this.children) {
     // iterate over the children nodes
     for (var i = 0; i < this.children.length; i++) {
+      /*
+      note: (wrong implementation. Ends loop too soon and return false if target value is not found in only one side of the tree before even having chance to check the other side)
+      * return this.children[i].contains(target)
+      */
       // if calling child.contains(target) is true
       if (this.children[i].contains(target)) {
         return true;
