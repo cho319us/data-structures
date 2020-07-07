@@ -72,7 +72,6 @@ HashTable.prototype.remove = function(k) {
   var bucket = this._storage.get(index);
   // if bucket does not exist
   if (!bucket) {
-    // return undefined
     return undefined;
   }
   // iterate over the bucket
@@ -92,7 +91,6 @@ HashTable.prototype.remove = function(k) {
       }
     }
   }
-  // return undefined
   return undefined;
 };
 
@@ -128,9 +126,10 @@ HashTable.prototype.resize = function(newLimit) {
 
 /*
  * Complexity: What is the time complexity of the above functions?
- * insert - O(n)worst case
- * retrieve - O(n)worst case
- * remove - O(n)worst case
+ * insert - O(n) worst case
+ * retrieve - O(n) worst case
+ * remove - O(n) worst case
+ * resize - O(n^2)
  */
 
 // To prevent excessive collisions, make your hashTable double in size as soon as 75 percent of the spaces have been filled
