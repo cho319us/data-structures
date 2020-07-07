@@ -48,10 +48,9 @@ BinarySearchTree.prototype.insert = function(node) {
 
 BinarySearchTree.prototype.contains = function(value) {
   // if value is equal to value of root
-  if (value === this.value) {
-    return true;
+  if (value === this.value) {return true;}
   // else if value is smaller than value of root
-  } else if (value < this.value) {
+  if (value < this.value) {
     // if left of root exist
     if (this.left) {
       // call contains fn on current left of root
