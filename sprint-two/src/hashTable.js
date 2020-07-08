@@ -97,32 +97,27 @@ HashTable.prototype.remove = function(k) {
 HashTable.prototype.resize = function(newLimit) {
   // create a variable to store old storage
   var oldStorage = this._storage;
-  console.log(this._storage)
   // update old limit to new limit
   this._limit = newLimit;
   // update old storage to new storage
   this._storage = LimitedArray(this._limit);
-  console.log(this._storage)
   // reset count back to 0
   this._count = 0;
   // iterate over the old storage
-  for (var i = 0; i < oldStorage.length; i++) {
-    // declare the current bucket
-    var currentBucket = oldStorage[i];
-    // if current bucket is defined
-    if (currentBucket) {
-      // iterate over the bucket
-      for (var j = 0; j < currentBucket.length; j++) {
-        // declare the current tuple
-        var currentTuple = currentBucket[j];
-        // re-insert the tuple to new array by calling insert function
-        this.insert(currentTuple[0], currentTuple[1]);
-      }
-    } else {
-      continue;
+  oldStorage.each(function(currentBucket) {
+    // if no bucket found in the current index of storage array, return
+    if (!currentBucket) {
+      return;
     }
-  }
-}
+    // iterate over the bucket
+    for (var i = 0; i < currentBucket.length; i++) {
+      // declare the current tuple
+      var currentTuple = currentBucket[i];
+      // re-insert the tuple to new array by calling insert function
+      this.insert(currentTuple[0], currentTuple[1]);
+    }
+  }.bind(this));
+};
 
 /*
  * Complexity: What is the time complexity of the above functions?
@@ -131,8 +126,4 @@ HashTable.prototype.resize = function(newLimit) {
  * remove - O(n) worst case
  * resize - O(n^2)
  */
-
-// To prevent excessive collisions, make your hashTable double in size as soon as 75 percent of the spaces have been filled
-
-// To save space, make sure the hashTable halves in size when space usage falls below 25 percent
 
