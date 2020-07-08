@@ -39,7 +39,6 @@ HashTable.prototype.insert = function(k, v) {
     // if count is greater than 75% of storage array
     if (this._count > (this._limit * 0.75)) {
       // double the storage size by calling resize function
-      console.log(this._storage)
       this.resize(this._limit * 2);
     }
   }
@@ -50,9 +49,9 @@ HashTable.prototype.retrieve = function(k) {
   // declare bucket
   var bucket = this._storage.get(index);
   // if bucket does not exist
-  if (!bucket)
-    // return null
+  if (!bucket) {
     return undefined;
+  }
   // iterate over bucket
   for (var i = 0; i < bucket.length; i++) {
     // declare tuple
